@@ -35,3 +35,12 @@ var busySeats = 0;
       };
 
 paintSeats(airlineSeats);
+
+var reserve = function(){
+  var btn = document.getElementById("btn");
+  btn.addEventListener("click", chooseZone);
+};
+
+var chooseZone = function(){
+  var choice = prompt("En que zona prefieres reservar \n 1. Primera Clase \n 2. Clase Economica \n \n  por favor ingresa el numero de tu preferencia")
+};
