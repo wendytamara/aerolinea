@@ -46,6 +46,8 @@ var chooseZone = function(){
     for (var i = 0; i < 4; i++) {
         if (airlineSeats[i]== false) {
           airlineSeats[i] = true;
+            reserveSeat(i);
+            paintTiket(i, zone);
           break;
         } else if (i == 3 && airlineSeats[i] == true) {
           reasignEconomicZone(zone);
@@ -58,6 +60,8 @@ var chooseZone = function(){
         for (var i = 4; i < 10; i++) {
           if (airlineSeats[i]== false) {
             airlineSeats[i] = true;
+            reserveSeat(i);
+            paintTiket(i, zone);
             break;
           } else if (i == 9 && airlineSeats[i] == true) {
              reasignFirstClassZone(zone);
@@ -65,8 +69,14 @@ var chooseZone = function(){
         }
       }
 
+var reserveSeat = function(indexToPaint){
+  var seat = document.getElementsByClassName("seats");
+  seat[indexToPaint].textContent = "ocupado";
+};
+
+
 var reasignEconomicZone = function(zone) {
-   var reasing = confirm("ya no quedan mas aientos disponibles en zona" + zone + "  \n   quiere reservar en Primera Clase?");
+   var reasing = confirm("ya no quedan mas aientos disponibles en " + zone + "  \n   quiere reservar en Zona Economica?");
    if (reasing == true) {
      checkEconomicZone();
    } else {
@@ -75,8 +85,8 @@ var reasignEconomicZone = function(zone) {
 };
 
 var nextFlight = function(){
-  alert("nuestro proximo vuelo as en 3 horas")
-}
+  alert("nuestro proximo vuelo sale en 3 horas")
+};
 
 var reasignFirstClassZone = function(zone){
   var reasing = confirm("ya no quedan mas aientos disponibles en " + zone + "  \n   quiere reservar en Primera  Clase?");
@@ -87,8 +97,6 @@ var reasignFirstClassZone = function(zone){
   }
 }
 
-
-
 if (choice ==1) {
   checkFirstClassZone();
 } else if (choice ==2){
@@ -96,8 +104,22 @@ if (choice ==1) {
 } else {
   alert("por favor ingrese un campo valido")
 }
-//  };
-
 };
+  var paintTiket = function(i, zone){
+    var containerTickets = document.getElementById("tickets");
+    var ticket = document.createElement("div");
+    ticket.className = "seats";
+    var title = document.createElement("p");
+    var reserveSeating = document.createElement("p");
+    var zoneClass = document.createElement("p");
+    title.textContent = "PASE DE ABORDAR";
+    reserveSeating.textContent = "N° de asiento:  " + (i + 1);
+    zoneClass.textContent = zone;
+    ticket.appendChild(title);
+    ticket.appendChild(reserveSeating);
+    ticket.appendChild(zoneClass);
+    containerTickets.appendChild(ticket);
+  }
+
 paintSeats(airlineSeats);
 reserve();
